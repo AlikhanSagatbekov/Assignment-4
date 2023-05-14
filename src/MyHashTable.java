@@ -18,15 +18,22 @@ public class MyHashTable<K,V> {
     private int size;
 
     public MyHashTable(){
-
+        chainArray = new HashNode[M];
+        size = 0;
     }
     public MyHashTable(int M){
         this.M = M;
         chainArray = new HashNode[M];
         size = 0;
     }
-    private int hash(K key){
-        return 0;
+    private int hash(K key){ // generating char from a key
+        String strKey = (String) key;
+        int sum = 0;
+        for(int i = 0; i < strKey.length(); i++){
+            sum += strKey.charAt(i);
+        }
+
+        return sum % M;
     }
     public void put(K key, V value){
 
