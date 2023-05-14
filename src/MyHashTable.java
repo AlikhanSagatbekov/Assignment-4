@@ -60,6 +60,21 @@ public class MyHashTable<K,V> {
         }
     }
     public V get(K key){
+        int i = hash(key);
+        if(chainArray[i] == null){
+            return null;
+        }else{
+            HashNode<K,V> currentNode = chainArray[i];
+            if(currentNode.key.equals(key)){
+                return currentNode.value;
+            }
+            while (currentNode != null) {
+                if(currentNode.key.equals(key)){
+                    return currentNode.value;
+                }
+                currentNode = currentNode.next;
+            }
+        }
         return null;
     }
     public V remove(K key){
