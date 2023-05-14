@@ -36,7 +36,28 @@ public class MyHashTable<K,V> {
         return sum % M;
     }
     public void put(K key, V value){
+        int i = hash(key);
+        HashNode<K,V> node = new HashNode<K,V>(key, value);
 
+        if(chainArray[i] == null){
+            chainArray[i] = node;
+            size++;
+        }else{
+            HashNode<K,V> currentNode = chainArray[i];
+            while(currentNode.next != null){
+                currentNode = currentNode.next;
+            }
+            currentNode.next = node;
+            size++;
+        }
+        if(M/size < 0.7){
+            M*=2;
+            HashNode<K,V>[] newChainArray = new HashNode[M];
+            for(int j = 0; j < chainArray.length; j++){
+                newChainArray[j] = chainArray[j];
+            }
+            chainArray = newChainArray;
+        }
     }
     public V get(K key){
         return null;
