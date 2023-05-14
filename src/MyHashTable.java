@@ -78,6 +78,25 @@ public class MyHashTable<K,V> {
         return null;
     }
     public V remove(K key){
+        int i = hash(key);
+        if(chainArray[i] == null){
+            throw new IndexOutOfBoundsException("There is no such key");
+        }else{
+            HashNode<K,V> currentNode = chainArray[i];
+            if(currentNode.key.equals(key)){
+                chainArray[i] = currentNode.next;
+            }else{
+                HashNode<K,V> previousNode = currentNode;
+                while(currentNode != null){
+                    if(currentNode.key.equals(key)){
+                        previousNode.next = currentNode.next;
+                    }
+                    previousNode = currentNode;
+                    currentNode = currentNode.next;
+
+                }
+            }
+        }
         return null;
     }
     public boolean contains(V value){
